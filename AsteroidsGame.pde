@@ -18,6 +18,7 @@ void draw(){
   
   tran.show();
   tran.move();
+  tran.countdown();
   
   for(int i = 0; i < bopis.length; i++){
     bopis[i].show();
