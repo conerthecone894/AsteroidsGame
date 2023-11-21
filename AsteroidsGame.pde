@@ -34,6 +34,7 @@ void draw(){
       tran.turn(4);
     if(key == 'p' || key == 'P'){
       tran.hyperspace();
+    }
   }
   
 }
