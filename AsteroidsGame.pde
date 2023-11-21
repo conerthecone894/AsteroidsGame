@@ -18,7 +18,7 @@ void draw(){
   
   tran.show();
   tran.move();
-  tran.countdown();
+  //tran.countdown();
   
   for(int i = 0; i < bopis.length; i++){
     bopis[i].show();
@@ -32,8 +32,8 @@ void draw(){
       tran.turn(-4);
     if(key == 'd' || key == 'D')
       tran.turn(4);
-    if(key == 'p' || key == 'P'){
-      tran.hyperspace();
+    //if(key == 'p' || key == 'P'){
+    //  tran.hyperspace();
     }
   }
   
