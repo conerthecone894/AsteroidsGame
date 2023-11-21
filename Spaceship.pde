@@ -19,8 +19,7 @@ class spaceship extends Floater{
   public void countdown(){
     timer--;
     stroke(255);
-    text(timer, 15, 15);
-    
+
     if(timer <= 0)
       timer = 0;
   }
