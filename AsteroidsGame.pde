@@ -1,69 +1,40 @@
-class spaceship extends Floater{
-  private int timer;
+int x = 150;
+int y = 150;
+
+spaceship tran = new spaceship();
+stars[] bopis = new stars[256];
+
+void setup(){
+  size(512, 512);
   
-  public spaceship(){
-    myCenterX = 256;
-    myCenterY = 256;
-    myXspeed = 0;
-    myYspeed = 0;
-    myPointDirection = 0;
-    myColor = color(250, 251, 246);
-    
-    corners = 14;
-    xCorners = new int[]{-4, 0, 24, -4, 0, 24, 12, 0, 0, 12, 0, -8, -8, 0};
-    yCorners = new int[]{0, 12, 0, 0, -12, 0, 0, 12, -12, 0, 0, 8, -8, 0};
-    
-    timer = 0;
+  for(int i = 0; i < bopis.length; i++){
+    bopis[i] = new stars();  
   }
+  
+}
 
-  public void countdown(){
-    timer--;
-    
-    if(timer <= 0){timer = 0;}
+void draw(){
+  background(#0f0f1b);
+  
+  tran.show();
+  tran.move();
+  tran.countdown();
+  
+  for(int i = 0; i < bopis.length; i++){
+    bopis[i].show();
+    bopis[i].drift();
   }
-
-  public void hyperspace(){
-    double startX, startY, endX, endY;
-    
-    if(timer <= 0){
-      startX = myCenterX;
-      startY = myCenterY;
-      
-      myCenterX = Math.random()*512;
-      myCenterY = Math.random()*512;
-      myPointDirection = Math.random()*360;
-      
-      endX = myCenterX;
-      endY = myCenterY;
-    
-      myXspeed = 0;
-      myYspeed = 0;
-    
-      timer = 88;
-      
-      stroke(myColor);
-      line((float)startX, (float)startY, (float)endX, (float)endY);
+  
+  if(keyPressed == true){
+    if(key == 'w' || key == 'W')
+      tran.accelerate(0.05);
+    if(key == 'a' || key == 'A')
+      tran.turn(-4);
+    if(key == 'd' || key == 'D')
+      tran.turn(4);
+    if(key == 'p' || key == 'P'){
+      tran.hyperspace();
     }
   }
   
-  public void flame(){
-    stroke(#fafbf6);
-  noFill();
-    beginShape();
-        curveVertex(x, y+20);
-        curveVertex(x, y+20);
-        curveVertex(x+4, y+23);
-        curveVertex(x+2, y+31);
-        curveVertex(x, y+34);
-        curveVertex(x, y+34);
-      endShape(); //right side of flame
-      beginShape();
-        curveVertex(x, y+20);
-        curveVertex(x, y+20);
-        curveVertex(x-4, y+23);
-        curveVertex(x-2, y+31);
-         curveVertex(x, y+34);
-        curveVertex(x, y+34);
-      endShape(); //left side of flame
-  }
 }
