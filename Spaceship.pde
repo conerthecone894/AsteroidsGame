@@ -1,13 +1,13 @@
 class spaceship extends Floater{
   private int timer;
   
-  public spaceship(){
+  public spaceship(){ //class constructor
     myCenterX = 256;
     myCenterY = 256;
     myXspeed = 0;
     myYspeed = 0;
     myPointDirection = 0;
-    myColor = color(250, 251, 246);
+    myColor = color(160, 160, 180);
     
     corners = 14;
     xCorners = new int[]{-4, 0, 24, -4, 0, 24, 12, 0, 0, 12, 0, -8, -8, 0};
@@ -16,13 +16,19 @@ class spaceship extends Floater{
     timer = 0;
   }
 
-  public void countdown(){
+  public void hitbox(){ //displays ship's hitbox
+    noStroke();
+    fill(250, 251, 246);
+    ellipse((float)myCenterX, (float)myCenterY, 10, 10);
+  }
+
+  public void countdown(){ //prevents you from spamming hyperspace
     timer--;
     
     if(timer <= 0){timer = 0;}
-  }
+  } 
 
-  public void hyperspace(){
+  public void hyperspace(){ //teleports you to a random spot and sets velocity to 0
     double startX, startY, endX, endY;
     
     if(timer <= 0){
@@ -46,7 +52,22 @@ class spaceship extends Floater{
     }
   }
   
-  public void flame(){
+                                        //what do you think these do?
+  public double getX(){return myCenterX;}
+  public double getY(){return myCenterY;}
+  
+  public void die(){ //destroys the ship & dispalys "game over" text
+    for(int i = 0; i < 14; i++){
+      xCorners[i] += (Math.random()*5)-2;
+      yCorners[i] += (Math.random()*5)-2;
+    }
+    
+    fill(myColor);
+    textSize(32);
+    text("you died lmaooooooooooooooooooooo", 45, 100);
+  }
+  
+  public void flame(){ //displays shape that appears behind ship when it's accelerating
     stroke(#fafbf6);
   noFill();
     beginShape();
