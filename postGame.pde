@@ -1,5 +1,5 @@
 class postGame{
-  private float timer, myX, myY, opacity, score;
+  private float timer, myX, myY, opacity, score, speed;
   private boolean goTime = false;
   
   public postGame(){
@@ -7,6 +7,30 @@ class postGame{
     myX = 256;
     myY = 35;
     opacity = 0;
+    speed = 0.5;
+  }
+  
+  public void menace(boolean a){
+    stroke(2);
+    fill(86, 95, 117);
+    ellipse(myX, myY, 45, 45);
+    line(myX+10, myY-10, myX-10, myY+10);
+    line(myX+10, myY+10, myX-10, myY-10);
+                    //draws the menace
+    
+    if(a == true){
+      if(tran.getX() > myX){
+        myX += speed;
+      } else {
+        myX -= speed;
+      }
+          if(tran.getY() > myY){
+        myY += speed;
+      } else {
+        myY -= speed;
+      }
+    } else {myX++;}
+                    //moves the menace
   }
   
   public void countdown(){
@@ -36,45 +60,20 @@ class postGame{
                     //tells the game that postgame has started
    
     if(goTime == true){
-      fill(255);
-      textSize(12);
-      text((int)score, 25, 88);
       score++;
     }
+    
+    if(speed < 2.88){
+      speed += score/888888;
+    }
   }
   
-  public boolean isItTime(){
-    return goTime;
-  }
-  public float getScore(){
-    return (int)score;
-  }
+  public boolean isItTime(){return goTime;}
+  public float getScore(){return (int)score;}
+  public float getX(){return myX;}
+  public float getY(){return myY;}
                     //get functions
   
-  public void end(){
-    goTime = false;
-  }
-  
-  public void menace(){
-    stroke(2);
-    fill(86, 95, 117);
-    ellipse(myX, myY, 45, 45);
-    line(myX+10, myY-10, myX-10, myY+10);
-    line(myX+10, myY+10, myX-10, myY-10);
-                    //draws the menace
-    
-    if(tran.getX() > myX){
-      myX += 0.5;
-    } else {
-      myX -= 0.5;
-    }
-        if(tran.getY() > myY){
-      myY += 0.5;
-    } else {
-      myY -= 0.5;
-    }
-                    //moves the meace
-  }
-  
-  
+  public void addScore(float s){score += s;}
+                   //set func.s
 }
