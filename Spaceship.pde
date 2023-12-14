@@ -24,7 +24,6 @@ class spaceship extends Floater{
 
   public void countdown(){ //prevents you from spamming hyperspace
     timer--;
-    
     if(timer <= 0){timer = 0;}
   } 
 
@@ -55,6 +54,15 @@ class spaceship extends Floater{
                                         //what do you think these do?
   public double getX(){return myCenterX;}
   public double getY(){return myCenterY;}
+  public double getDirection(){return myPointDirection;}
+  
+  public void postGame(){
+    myCenterX = 256;
+    myCenterY = 450;
+    myXspeed = 0;
+    myYspeed = 0;
+    myPointDirection = 270;
+  }
   
   public void die(){ //destroys the ship & dispalys "game over" text
     for(int i = 0; i < 14; i++){
@@ -64,27 +72,11 @@ class spaceship extends Floater{
     
     fill(myColor);
     textSize(32);
-    text("you died lmaooooooooooooooooooooo", 45, 100);
+    if(tim.isItTime() == false){
+      text("you died lmaooooooooooooooooooooo", 45, 100);
+    } else {
+      text("score: " + (int)tim.getScore(), 45, 100);
+    }
   }
   
-  public void flame(){ //displays shape that appears behind ship when it's accelerating
-    stroke(#fafbf6);
-  noFill();
-    beginShape();
-        curveVertex(x, y+20);
-        curveVertex(x, y+20);
-        curveVertex(x+4, y+23);
-        curveVertex(x+2, y+31);
-        curveVertex(x, y+34);
-        curveVertex(x, y+34);
-      endShape(); //right side of flame
-      beginShape();
-        curveVertex(x, y+20);
-        curveVertex(x, y+20);
-        curveVertex(x-4, y+23);
-        curveVertex(x-2, y+31);
-         curveVertex(x, y+34);
-        curveVertex(x, y+34);
-      endShape(); //left side of flame
-  }
 }
